@@ -29,11 +29,12 @@ def assert_incident_type(method):
             method(self, *args, **kwargs)
             return
         if not isinstance(incident_type, str):
-            raise TypeError("must pass argument of type str to incident_type")
+            raise TypeError("must pass string type to incident_type")
         if not incident_type.lower() in incidents:
-            raise ValueError("allowed arguments for incident_type: {}".format(
+            raise ValueError("allowed kwargs for incident_type: {}".format(
                 tuple(kwarg for kwarg in incidents)
             ))
+        kwargs['incident_type'] = incident_type.lower()
         method(self, *args, **kwargs)
 
     return wrapper
