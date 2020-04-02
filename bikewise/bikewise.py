@@ -1,3 +1,5 @@
+"""A simple BikeWise API wrapper."""
+
 import json
 import requests
 
