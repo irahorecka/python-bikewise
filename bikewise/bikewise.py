@@ -19,25 +19,16 @@ def api_method(method):
     return wrapper
 
 
-def assert_incident_type(method):
-    def wrapper(self, *args, **kwargs):
-        incidents = ('', 'crash', 'hazard', 'theft', 'unconfirmed',
-                     'infrastructure_issue', 'chop_shop')
-        try:
-            incident_type = kwargs['incident_type']
-        except KeyError:
-            method(self, *args, **kwargs)
-            return
-        if not isinstance(incident_type, str):
-            raise TypeError("must pass string type to incident_type")
-        if not incident_type.lower() in incidents:
-            raise ValueError("allowed kwargs for incident_type: {}".format(
-                tuple(kwarg for kwarg in incidents)
-            ))
-        kwargs['incident_type'] = incident_type.lower()
-        method(self, *args, **kwargs)
-
-    return wrapper
+def assert_incident_type(incident_type):
+    incidents = ('', 'crash', 'hazard', 'theft', 'unconfirmed',
+                 'infrastructure_issue', 'chop_shop')
+    if not isinstance(incident_type, str):
+        raise TypeError("must pass string type to incident_type")
+    if not incident_type.lower() in incidents:
+        raise ValueError("allowed kwargs for incident_type: {}".format(
+            tuple(kwarg for kwarg in incidents)
+        ))
+    return incident_type.lower()
 
 
 class BaseAPI():
@@ -77,9 +68,9 @@ class Incidents(BaseAPI):
             'id': id}
 
     @api_method
-    @assert_incident_type
     def features(self, page=0, per_page=25, occurred_before=0, occurred_after=0,
                  incident_type="", proximity="", proximity_area=0, query=""):
+        incident_type = assert_incident_type(incident_type)
         self.parameters = {
             'page': page,
             'per_page': per_page,
@@ -103,9 +94,9 @@ class Locations(BaseAPI):
         }
 
     @api_method
-    @assert_incident_type
     def features(self, occurred_before=0, occurred_after=0, incident_type="", proximity="",
                  proximity_area=0, query="", limit=100, all=False):
+        incident_type = assert_incident_type(incident_type)
         self.parameters = {
             'occurred_before': occurred_before,
             'occurred_after': occurred_after,
@@ -118,9 +109,9 @@ class Locations(BaseAPI):
         }
 
     @api_method
-    @assert_incident_type
     def markers(self, occurred_before=0, occurred_after=0, incident_type="", proximity="",
                 proximity_area=0, query="", limit=100, all=False):
+        incident_type = assert_incident_type(incident_type)
         self.api = 'locations/markers'
         self.parameters = {
             'occurred_before': occurred_before,
