@@ -1,13 +1,9 @@
 python-bikewise
 ================
 
-A simple `BikeWise <https://www.bikewise.org/documentation/api_v2>`__ API wrapper.
+A simple `BikeWise <https://www.bikewise.org/>`__ API wrapper.
 
 License: `MIT <https://en.wikipedia.org/wiki/MIT_License>`__.
-
-Disclaimer
-----------
-API key or token is not required to access data from BikeWise.
 
 Installation
 ------------
@@ -32,7 +28,7 @@ You can access incident or location information:
 - Access the ``locations`` endpoint if you'd like to map incident locations. This endpoint behaves exactly like incidents, but returns a valid geojson.
 - Access the ``locations.markers`` endpoint (behaves like root ``locations`` endpoint) to return simplestyled markers (mapbox styled markers).
 
-A table of acceptable parameters for methods in ``BikeWise()``. Note: some parameters are restricted to certain methods - please look at the examples below.
+A table of acceptable parameters for methods in ``BikeWise()``. Note, some parameters are restricted to certain methods - please look at the examples below.
 
 +----------------------+-----------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ﻿Parameter            | Data Type | Description                                          | Notes                                                                                                                                                                                                             |
@@ -41,9 +37,9 @@ A table of acceptable parameters for methods in ``BikeWise()``. Note: some param
 +----------------------+-----------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``per_page``         | integer   | Number of results to return per page. Defaults to 25 |                                                                                                                                                                                                                   |
 +----------------------+-----------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``occurred_before``  | integer   | End of period                                        |                                                                                                                                                                                                                   |
+| ``occurred_before``  | integer   | End of period                                        | Accepts UTC unix timestamps.                                                                                                                                                                                      |
 +----------------------+-----------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``occurred_after``   | integer   | Start of period                                      |                                                                                                                                                                                                                   |
+| ``occurred_after``   | integer   | Start of period                                      | Accepts UTC unix timestamps.                                                                                                                                                                                      |
 +----------------------+-----------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``incident_type``    | string    | Only incidents of specific type                      |                                                                                                                                                                                                                   |
 +----------------------+-----------+------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -68,7 +64,7 @@ Incidents:
     # incidents method parameters
     """
     bike.incidents(page=0, per_page=25)
-    bike.incidents.id(113424)
+    bike.incidents.id(id)
     bike.incidents.features(page=0, per_page=25, occurred_before=0, occurred_after=0,
                             incident_type="", proximity="", proximity_area=0, query="")
     """

@@ -1,4 +1,4 @@
-"""Unit testing for bikewise module in ../bikewise"""
+"""Unit testing for bikewise module in ../bikewise."""
 
 from bikewise import BikeWise
 import os
@@ -68,7 +68,6 @@ class TestBikeWise(unittest.TestCase):
             self.assertIsInstance(incidents, dict)
             incidents = self.bikewise.incidents.features(page=_page, per_page=self.per_page[0])
             self.assertIsInstance(incidents, dict)
-
         for t_page in self.page_test:
             incidents = self.bikewise.incidents(page=t_page, per_page=self.per_page[0])
             self.assertIsInstance(incidents, dict)

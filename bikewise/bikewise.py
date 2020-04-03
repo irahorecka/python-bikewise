@@ -5,6 +5,7 @@ import requests
 
 
 def api_method(method):
+    """Decorator for using method signatures for generating url endpoint."""
     def wrapper(self, *args, **kwargs):
         method(self, *args, **kwargs)
         api = self.api
@@ -22,6 +23,7 @@ def api_method(method):
 
 
 def assert_incident_type(incident_type):
+    """Function to evaluate correct parameter for keyword argument incident_type."""
     incidents = ('', 'crash', 'hazard', 'theft', 'unconfirmed',
                  'infrastructure_issue', 'chop_shop')
     if not isinstance(incident_type, str):
@@ -54,6 +56,7 @@ class BaseAPI():
 
 
 class Incidents(BaseAPI):
+    """API for detailed information about bike incidents."""
     api = 'incidents'
 
     @api_method
@@ -85,6 +88,8 @@ class Incidents(BaseAPI):
 
 
 class Locations(BaseAPI):
+    """API for detailed information about bike incidents
+    with a valid geojson."""
     api = 'locations'
 
     @api_method
@@ -127,6 +132,7 @@ class Locations(BaseAPI):
 
 
 class BikeWise():
+    """General class for the BikeWise API."""
     incidents = None
     locations = None
 

@@ -1,4 +1,4 @@
-"""Setup for carmd package."""
+"""Setup for bikewise package."""
 
 import setuptools
 
@@ -15,7 +15,7 @@ setuptools.setup(
     version='v0.1.0',
     long_description=README,
     long_description_content_type="text/x-rst",
-    url='https://github.com/irahorecka/python-carmd',
+    url='https://github.com/irahorecka/python-bikewise',
     packages=['bikewise'],
     python_requires=">=3.5",
     install_requires=['requests'],
