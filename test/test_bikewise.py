@@ -58,6 +58,10 @@ class TestBikeWise(unittest.TestCase):
         # comment out if you want to view instance influence on methods
         self.bikewise = BikeWise()
 
+    def test_id(self):
+        incidents = self.bikewise.incidents.id(113424)
+        self.assertIsInstance(incidents, dict)
+
     def test_page(self):
         for _page in self.page:
             incidents = self.bikewise.incidents(page=_page, per_page=self.per_page[0])

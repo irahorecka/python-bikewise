@@ -44,7 +44,6 @@ class BaseAPI():
     def get(self, endpoint):
         """Get request from specified url endpoint."""
         url = '{}/{}'.format(self.base_url, endpoint)
-        print(url)
         response = requests.get(url)
         if response.status_code != 200:
             raise ConnectionError("bad request: {}\n"
